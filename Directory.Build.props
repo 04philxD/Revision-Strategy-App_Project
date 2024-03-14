@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <OutputPath>$(SolutionDir)builds\$(Configuration)\$(MSBuildProjectName)\</OutputPath>
+    <BaseIntermediateOutputPath>$(SolutionDir)builds\$(MSBuildProjectName)\obj</BaseIntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+  <PRE_RELEASE>true</PRE_RELEASE>
+    <BUILD_NUMBER>1</BUILD_NUMBER>
+    <VersionSuffix Condition="'$(PRE_RELEASE)' == 'true'">alpha.$(BUILD_NUMBER)</VersionSuffix>
+  </PropertyGroup>
+</Project>
