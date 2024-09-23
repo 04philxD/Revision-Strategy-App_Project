@@ -15,8 +15,8 @@ namespace StrategyConsoleApp.Strategies
     public abstract class AToExcelProcessor: IProcessToExcel
     {
         protected readonly ConcurrentDictionary<string, string> _result = [];
-        //protected readonly string date = DateTime.Now.ToString("MMyy");
-        protected readonly string date = "0924";
+        protected readonly string date = DateTime.Now.ToString("MMyy");
+        //protected readonly string date = "0624";      //nur für die Nacherstellung von Monaten
         protected string destinationPath = string.Empty;
 
         public abstract ConcurrentDictionary<string, string> ProcessToExcel(string workingPath, ConcurrentDictionary<string, List<DataRow>> departmentsData);
