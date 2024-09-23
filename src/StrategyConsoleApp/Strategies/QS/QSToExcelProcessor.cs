@@ -44,7 +44,7 @@ namespace StrategyConsoleApp.Strategies.QS
         public override void ProcessDepartment(KeyValuePair<string, List<DataRow>> pair, string dir, DataRow columnNames)
         {
             IWorkbook workbook = new XSSFWorkbook();
-
+            Console.WriteLine(workbook);
             List<string> fileNames = pair.Value
                 .Where(row => row.Table.Columns.Contains("SourceFile"))
                 .Select(row => row["SourceFile"].ToString())

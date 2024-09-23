@@ -7,6 +7,12 @@ namespace StrategyConsoleApp.Strategies.QS
     {
         private readonly DataTable _columnNamesTable = new();
         private bool _isFirstFile = true;
+        private readonly QsStrategyConfig _config;
+
+        public QSTxtFileReader(QsStrategyConfig config)
+        {
+            _config = config;
+        }
 
         public override void ReadFile(string file, string targetPath, ConcurrentDictionary<string, List<DataRow>> departments)
         {
@@ -16,6 +22,7 @@ namespace StrategyConsoleApp.Strategies.QS
                 try
                 {
                     Directory.CreateDirectory(targetPath);
+                    Console.WriteLine(targetPath);
                     string[] lines = File.ReadAllLines(file, System.Text.Encoding.Latin1);
 
                     if (!lines.Any())
@@ -27,10 +34,10 @@ namespace StrategyConsoleApp.Strategies.QS
                         departments.TryAdd("columnNames", _columnNamesTable.AsEnumerable().ToList());
                     }
 
-                    LoadData(lines, file);
+                    LoadData(lines, SplitFileName(file));
                     Console.WriteLine($"File {Path.GetFileName(file)} succesfully processed.");
 
-                    FillDepartments(departments);
+                    FillDepartments(departments, _config.SpecialNames);
 
                     //TestDictionary(departments)
                 }
@@ -76,6 +83,15 @@ namespace StrategyConsoleApp.Strategies.QS
             _columnNamesTable.LoadDataRow(columnNames.ToArray(), true);
 
             return namesCreated;
+        }
+
+        public string SplitFileName(string fileName)
+        {
+            string[] fileNameParts = fileName.Split("_");
+
+            string newFileName = fileNameParts.Take(2).Aggregate((a, b) => $"{a}_{b}");
+
+            return newFileName;
         }
     }
 }

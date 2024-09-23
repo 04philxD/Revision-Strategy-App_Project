@@ -13,5 +13,6 @@ public class QsStrategyConfig
     public List<string> GeneralColumnsToHide { get; set; } = null!;
     public string HeaderRowStyleName { get; set; } = null!;
     public List<string> DataValidation { get; set; } = null!;
+    public List<string> SpecialNames {  get; set; } = null!;
 
 }
